@@ -15,12 +15,11 @@ type AnimatePropType = {
 };
 
 const animateOpacitySplashScreen = () => keyframes`
-    0% {
+    from {
         opacity:  1;
     }
-    100% {
+    to {
         opacity: 0;
-        display: none;
     }
 `;
 
@@ -67,16 +66,16 @@ const animateHeadlineAfter = () => keyframes`
 export const StyledSplashScreen = styled.div<AnimatePropType>`
   width: 100%;
   height: 100%;
-  z-index: 1;
   position: absolute;
   top: 0;
   left: 0;
   overflow: hidden;
   display: flex;
   align-items: center;
+  background-color: white;
   justify-content: center;
   animation: ${({ animate }) => (animate ? animateOpacitySplashScreen : "none")}
-    3s linear;
+    3s forwards;
 `;
 
 export const StyledCircle = styled.div<SyledCircleTypes>`
@@ -117,12 +116,16 @@ export const StyledSmallCircle = styled.div<SyledCircleTypes>`
 
 export const StyledHeadline = styled.div<AnimatePropType>`
   width: 98%;
-  padding: 10vh 0;
+  padding: 7vh 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
+  z-index: 10;
+  h1 {
+    font-size: 46px;
+  }
   ::before {
     content: "";
     width: 100%;
@@ -146,5 +149,19 @@ export const StyledHeadline = styled.div<AnimatePropType>`
     bottom: 0;
     animation: ${({ animate }) => (animate ? animateHeadlineAfter : "none")} 3s
       linear;
+  }
+`;
+
+export const StyledBeginButton = styled.button`
+  background-color: transparent;
+  border: none;
+  outline: none;
+  padding: 1vh;
+  border: 1px solid transparent;
+  transition: border 0.3s;
+  cursor: pointer;
+  &:hover {
+    outline: none;
+    border: 1px solid black;
   }
 `;
