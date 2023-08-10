@@ -5,10 +5,15 @@ import { useState } from "react";
 import { SplashScreen } from "./components/SplashScreen";
 
 function App() {
+  const [showSplashScreen, setShowSplashScreen] = useState(true);
+
   return (
     <Wrapper>
       <GlobalStyle />
-      <SplashScreen />
+      {showSplashScreen ? (
+        <SplashScreen onSetShowSplashScreen={setShowSplashScreen} />
+      ) : null}
+      <div>TEST</div>
     </Wrapper>
   );
 }

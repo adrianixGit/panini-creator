@@ -5,9 +5,14 @@ import {
   StyledMiddleCircle,
   StyledHeadline,
   StyledSmallCircle,
+  StyledBeginButton,
 } from "../styles/SplashScreen.styled";
 
-export const SplashScreen = () => {
+type SplashScreenTypes = {
+  onSetShowSplashScreen: (isShowingSplashScreen: boolean) => void;
+};
+
+export const SplashScreen = ({ onSetShowSplashScreen }: SplashScreenTypes) => {
   const [animate, setAnimate] = useState(false);
 
   const handleAnimate = () => {
@@ -15,11 +20,12 @@ export const SplashScreen = () => {
 
     setTimeout(() => {
       setAnimate(false);
+      onSetShowSplashScreen(false);
     }, 3000);
   };
 
   return (
-    <StyledSplashScreen onClick={() => handleAnimate()} animate={animate}>
+    <StyledSplashScreen animate={animate}>
       <StyledMiddleCircle animate={animate}>
         <StyledCircle
           style={{ right: "75%" }}
@@ -47,6 +53,9 @@ export const SplashScreen = () => {
         />
         <StyledHeadline animate={animate}>
           <h1>Panini Creator</h1>
+          <StyledBeginButton onClick={() => handleAnimate()}>
+            BEGIN
+          </StyledBeginButton>
         </StyledHeadline>
         <StyledSmallCircle
           style={{ top: "58%" }}
